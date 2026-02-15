@@ -1,0 +1,31 @@
+services:
+  # Orchestration Backend (Express)
+  - type: web
+    name: aerophysics-orchestrator
+    env: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: PYTHON_BACKEND_URL
+        fromService:
+          name: aerophysics-brain
+          type: web
+          property: host
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+
+  # AI Brain (FastAPI)
+  - type: web
+    name: aerophysics-brain
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false

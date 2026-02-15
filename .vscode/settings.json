@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    "files.exclude": {
+        "out": true
+    },
+    "search.exclude": {
+        "out": true
+    }
+}
